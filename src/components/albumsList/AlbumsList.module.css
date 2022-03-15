@@ -1,0 +1,47 @@
+.album {
+  display: flex;
+  flex-direction: column;
+  margin: 10%;
+  background-color: #3d405b;
+  padding: 20%;
+  text-align: center;
+  word-wrap: break-word;
+  color: rgba(255, 255, 255, 0.384);
+}
+
+.album:hover {
+  background-color: #3d405b6e;
+  color: black;
+}
+
+.pagenationButtons {
+  height: 5px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 5em;
+  margin-bottom: 0.5em;
+}
+
+.pagenationButtons a {
+  padding: 7px;
+  margin: 5px;
+  color: #3d405b;
+}
+
+.pagenationPreviousLink a {
+  text-decoration: none;
+}
+
+.pagenationNextLink {
+  text-decoration: none;
+}
+
+.pagenationActive a {
+  color: #e07a5f;
+  font-weight: 900;
+}
+
+.pagenationDisabled {
+  color: lightgray;
+}

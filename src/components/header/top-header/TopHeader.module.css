@@ -4,11 +4,42 @@
   display: flex;
   justify-content: center;
   font-family: 'Fredoka', sans-serif;
-  font-size: 3em;
+  font-size: 2em;
   padding: 0;
   margin-top: 0;
+  color: #3d405b;
 }
 
 .titleEnd {
-  color: #ff686b;
+  color: #e07a5f;
 }
+
+/*tablet*/
+@media only screen and (min-width: 600px) and (max-width: 800px) {
+  .header {
+    margin-top: 3%;
+  }
+
+  h1 {
+    font-size: 1em;
+  }
+}
+
+/*mobile phone*/
+@media only screen and (max-width: 630px) {
+  .header {
+    margin-top: 2%;
+  }
+
+  h1 {
+    font-size: 1em;
+  }
+}
+
+/*tablet*/ /*
+@media only screen and (min-width: 631px) and (max-width: 770px) {
+}
+
+/*mobile phone*/ /*
+@media only screen and (max-width: 630px) {
+} */
