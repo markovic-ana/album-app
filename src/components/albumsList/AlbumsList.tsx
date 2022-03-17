@@ -3,6 +3,8 @@ import useFetch from 'react-fetch-hook'
 import ReactPaginate from 'react-paginate'
 import { BASE_URL } from '../../config/params'
 import { AlbumsDTO } from '../../interfaces/AlbumsInterface'
+import AlbumAuthor from '../albumAuthor/AlbumsAuthor'
+import SearchBar from '../searchBar/SearchBar'
 import AlbumsListstyles from './AlbumsList.module.css'
 
 const AlbumsList = () => {
@@ -17,15 +19,16 @@ const AlbumsList = () => {
     }
   }, [data, isLoading])
 
-  const albumsPerPage = 10
-  const pagesVisited = pageNumber * albumsPerPage
-  const pageCount = Math.ceil(albumsList.length / albumsPerPage)
+  const itemsPerPage = 10
+  const pagesVisited = pageNumber * itemsPerPage
+  const pageCount = Math.ceil(albumsList.length / itemsPerPage)
 
   const displayAlbums = albumsList
-    .slice(pagesVisited, pagesVisited + albumsPerPage)
+    .slice(pagesVisited, pagesVisited + itemsPerPage)
     .map((album) => (
       <div className={AlbumsListstyles.album} key={album.id}>
         {album.title}
+        <AlbumAuthor albumsData={albumsList} />
       </div>
     ))
 
@@ -41,6 +44,7 @@ const AlbumsList = () => {
         </div>
       )}
       {isLoading && <div>Loading...</div>}
+      {data && <SearchBar placeholder="Search" data={data} />}
       {data && displayAlbums}
       <ReactPaginate
         previousLabel={'«'}

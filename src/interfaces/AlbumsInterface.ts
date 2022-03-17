@@ -1,5 +1,5 @@
 export interface AlbumsDTO {
-  userid: number
+  userId: number
   id: number
   title: string
 }

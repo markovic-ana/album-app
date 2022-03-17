@@ -6,6 +6,7 @@ h2 {
   border-bottom: 2px solid #000;
   line-height: 0.1em;
   margin: 10px 0 20px;
+  margin-bottom: -80px;
 }
 
 h2 span {
