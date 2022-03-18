@@ -6,6 +6,7 @@ import { AlbumsDTO } from '../../interfaces/AlbumsInterface'
 import AlbumAuthor from '../albumAuthor/AlbumsAuthor'
 import SearchBar from '../searchBar/SearchBar'
 import AlbumsListstyles from './AlbumsList.module.css'
+import { Link } from 'react-router-dom'
 
 const AlbumsList = () => {
   const [albumsList, setAlbumsList] = useState<AlbumsDTO[]>([])
@@ -25,11 +26,13 @@ const AlbumsList = () => {
 
   const displayAlbums = albumsList
     .slice(pagesVisited, pagesVisited + itemsPerPage)
-    .map((album) => (
-      <div className={AlbumsListstyles.album} key={album.id}>
-        {album.title}
-        <AlbumAuthor albumsData={albumsList} />
-      </div>
+    .map((album, id) => (
+      <Link to={`/albums/${id}`}>
+        <div className={AlbumsListstyles.album} key={album.id}>
+          {album.title}
+          <AlbumAuthor albumsData={albumsList} />
+        </div>
+      </Link>
     ))
 
   const changePage = ({ selected }) => {
@@ -44,7 +47,7 @@ const AlbumsList = () => {
         </div>
       )}
       {isLoading && <div>Loading...</div>}
-      {data && <SearchBar placeholder="Search" data={data} />}
+      {data && <SearchBar placeholder="Search" data={data} params="albums" />}
       {data && displayAlbums}
       <ReactPaginate
         previousLabel={'«'}

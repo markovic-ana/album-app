@@ -13,3 +13,11 @@
   margin-top: 0px;
   padding-top: 0.5%;
 }
+
+a:hover {
+  background-color: white;
+}
+
+a {
+  cursor: pointer;
+}

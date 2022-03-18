@@ -30,8 +30,8 @@ const AlbumAuthor = ({ albumsData }) => {
     }
   }, [albumsData, albumsData.userId, data, users])
 
-  if (!isLoading) {
-    return <div>Loading</div>
+  if (!author) {
+    return <div>Loading...</div>
   }
 
   return <div>{author?.name}</div>

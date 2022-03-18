@@ -22,6 +22,7 @@ input {
   padding: 15px;
   width: 280px;
   padding-left: 5px;
+  margin-top: -22px;
 }
 
 .searchIcon {
@@ -29,6 +30,7 @@ input {
   display: grid;
   place-items: center;
   padding-right: 8px;
+  margin-top: -22px;
 }
 
 input:focus {

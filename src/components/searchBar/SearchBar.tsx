@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import SearchBarstyles from './SearchBar.module.css'
 import { VscSearch } from 'react-icons/vsc'
+import { Link } from 'react-router-dom'
 
-const SearchBar = ({ placeholder, data }) => {
+const SearchBar = ({ placeholder, data, params }) => {
   const [filteredData, setFilteredData] = useState([])
 
   const handleFilter = (e) => {
@@ -27,17 +28,13 @@ const SearchBar = ({ placeholder, data }) => {
       </div>
       {filteredData.length !== 0 && (
         <div className={SearchBarstyles.dataResult}>
-          {filteredData.slice(0, 10).map((value, index) => {
+          {filteredData.slice(0, 10).map((value, id) => {
             return (
-              <div key={index}>
-                <a
-                  className={SearchBarstyles.dataItem}
-                  href="#?"
-                  target="_blank"
-                >
+              <Link to={`/${params}/${id}`}>
+                <div key={id} className={SearchBarstyles.dataItem}>
                   <p>{value.title}</p>
-                </a>
-              </div>
+                </div>
+              </Link>
             )
           })}
         </div>
