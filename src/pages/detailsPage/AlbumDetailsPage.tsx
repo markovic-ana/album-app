@@ -35,12 +35,12 @@ const AlbumDetailsPage = () => {
   const displayPhotos = photosList
     .slice(pagesVisited, pagesVisited + itemsPerPage)
     .map((photo, id) => (
-      <Link to={`/photos/${id}`}>
-        <div key={id}>
+      <div key={id}>
+        <Link to={`/photos/${id}`}>
           <img src={`${photo.thumbnailUrl}`} alt={`${photo.title}`} />
           <p className={styles.imgTitle}>{photo.title}</p>
-        </div>
-      </Link>
+        </Link>
+      </div>
     ))
 
   const changePage = ({ selected }) => {

@@ -3,7 +3,7 @@ import useFetch from 'react-fetch-hook'
 import ReactPaginate from 'react-paginate'
 import { BASE_URL } from '../../config/params'
 import { AlbumsDTO } from '../../interfaces/AlbumsInterface'
-import AlbumAuthor from '../albumAuthor/AlbumsAuthor'
+// import AlbumAuthor from '../albumAuthor/AlbumsAuthor'
 import SearchBar from '../searchBar/SearchBar'
 import AlbumsListstyles from './AlbumsList.module.css'
 import { Link } from 'react-router-dom'
@@ -26,14 +26,15 @@ const AlbumsList = () => {
 
   const displayAlbums = albumsList
     .slice(pagesVisited, pagesVisited + itemsPerPage)
-    .map((album, id) => (
-      <Link to={`/albums/${id}`}>
-        <div className={AlbumsListstyles.album} key={album.id}>
-          {album.title}
-          <AlbumAuthor albumsData={albumsList} />
+    .map((album, id) => {
+      return (
+        <div key={id}>
+          <Link to={`/albums/${id}`}>
+            <div className={AlbumsListstyles.album}>{album.title}</div>
+          </Link>
         </div>
-      </Link>
-    ))
+      )
+    })
 
   const changePage = ({ selected }) => {
     setPageNumber(selected)

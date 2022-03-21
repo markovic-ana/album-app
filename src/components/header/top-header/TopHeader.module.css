@@ -16,12 +16,8 @@
 
 /*tablet*/
 @media only screen and (min-width: 600px) and (max-width: 800px) {
-  .header {
-    margin-top: 3%;
-  }
-
   h1 {
-    font-size: 1em;
+    font-size: 1.5em;
   }
 }
 
@@ -35,11 +31,3 @@
     font-size: 1em;
   }
 }
-
-/*tablet*/ /*
-@media only screen and (min-width: 631px) and (max-width: 770px) {
-}
-
-/*mobile phone*/ /*
-@media only screen and (max-width: 630px) {
-} */

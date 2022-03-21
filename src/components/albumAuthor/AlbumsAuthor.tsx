@@ -25,7 +25,7 @@ const AlbumAuthor = ({ albumsData }) => {
     //albumsData.userId nedef.
     const checkForAuthor = users.find((user) => user.id === albumsData.userId)
     console.log('check', albumsData.userId)
-    if (checkForAuthor) {
+    if (checkForAuthor[0]) {
       setAuthor(checkForAuthor[0])
     }
   }, [albumsData, albumsData.userId, data, users])
