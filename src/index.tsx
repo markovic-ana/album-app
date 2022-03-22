@@ -4,15 +4,18 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './Layout'
+import SimpleReactLightbox from 'simple-react-lightbox'
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="albums/:id" element={<Layout />} />
-      </Routes>
-    </BrowserRouter>
+    <SimpleReactLightbox>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="albums/:id" element={<Layout />} />
+        </Routes>
+      </BrowserRouter>
+    </SimpleReactLightbox>
   </React.StrictMode>,
   document.getElementById('root')
 )

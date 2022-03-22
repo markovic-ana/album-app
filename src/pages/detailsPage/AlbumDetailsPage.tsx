@@ -7,6 +7,8 @@ import ReactPaginate from 'react-paginate'
 import { PhotosDTO } from '../../interfaces/PhotosDTO'
 import { Link } from 'react-router-dom'
 import styles from './AlbumDetailsPage.module.css'
+import { SRLWrapper } from 'simple-react-lightbox'
+import { NONAME } from 'dns'
 
 const AlbumDetailsPage = () => {
   const [photosList, setPhotosList] = useState<PhotosDTO[]>([])
@@ -34,17 +36,28 @@ const AlbumDetailsPage = () => {
 
   const displayPhotos = photosList
     .slice(pagesVisited, pagesVisited + itemsPerPage)
-    .map((photo, id) => (
-      <div key={id}>
-        <Link to={`/photos/${id}`}>
-          <img src={`${photo.thumbnailUrl}`} alt={`${photo.title}`} />
-          <p className={styles.imgTitle}>{photo.title}</p>
-        </Link>
-      </div>
-    ))
+    .map((photo, id) => {
+      return (
+        <div key={id}>
+          <a href={`${photo.url}`}>
+            <img src={`${photo.thumbnailUrl}`} alt={`${photo.title}`} />
+            <p className={styles.imgTitle}>{photo.title}</p>
+          </a>
+        </div>
+      )
+    })
 
   const changePage = ({ selected }) => {
     setPageNumber(selected)
+  }
+
+  const options = {
+    buttons: {
+      showAutoplayButton: false,
+      showDownloadButton: false,
+      showFullscreenButton: false,
+      showThumbnailsButton: false,
+    },
   }
 
   return (
@@ -62,14 +75,13 @@ const AlbumDetailsPage = () => {
           params="photos"
         />
       )}
-      <div className={columnNumber}>{data && displayPhotos}</div>
+      <SRLWrapper options={options}>
+        <div className={columnNumber}>{data && displayPhotos}</div>
+      </SRLWrapper>
       <div className={styles.columnsIcons}>
         <button onClick={() => setColumnNumber(twoColumns)}>|| </button>
         <button onClick={() => setColumnNumber(threeColumns)}>|||</button>
         <button onClick={() => setColumnNumber(fourColumns)}>||||</button>
-        {/* <GiDiceSixFacesTwo onClick={() => setColumnNumber(twoColumns)} />
-        <GiDiceSixFacesThree onClick={() => setColumnNumber(threeColumns)} />
-        <GiDiceSixFacesFour onClick={() => setColumnNumber(fourColumns)} /> */}
       </div>
       <ReactPaginate
         previousLabel={'«'}
