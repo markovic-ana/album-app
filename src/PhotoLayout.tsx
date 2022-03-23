@@ -1,21 +1,21 @@
 import React from 'react'
 import './App.css'
+import Footer from './components/footer/Footer'
 import BottomHeader from './components/header/bottom-header/BottomHeader'
 import TopHeader from './components/header/top-header/TopHeader'
-import Footer from './components/footer/Footer'
-import AlbumDetailsPage from './pages/detailsPage/AlbumDetailsPage'
+import PhotoDetails from './pages/photoDetailsPage/PhotoDetails'
 
-const Layout = () => {
+const PhotoLayout = () => {
   return (
     <div>
-      <div className="container">
+      <div className="photoLayoutContainer">
         <TopHeader />
         <BottomHeader title="photography is the art of making memories" />
-        <AlbumDetailsPage />
+        <PhotoDetails />
       </div>
       <Footer />
     </div>
   )
 }
 
-export default Layout
+export default PhotoLayout

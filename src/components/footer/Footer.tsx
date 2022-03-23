@@ -3,9 +3,9 @@ import styles from './Footer.module.css'
 
 const Footer = () => {
   return (
-    <div className={styles.footer}>
-      © 1996-2022, Albumist.com, Inc. or its affiliates
-    </div>
+    <footer className={styles.footer}>
+      <span>© 1996-2022, Albumist.com, Inc. or its affiliates</span>
+    </footer>
   )
 }
 

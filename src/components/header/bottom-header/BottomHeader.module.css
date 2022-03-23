@@ -18,23 +18,28 @@ h2 span {
 
 @media only screen and (min-width: 430px) and (max-width: 770px) {
   h2 {
+    margin-top: 5px;
     font-size: 1em;
     line-height: 0.4;
   }
 
   h2 span {
-    font-size: 0.8em;
+    margin-top: 5px;
+    font-size: 1em;
   }
 }
 
 @media only screen and (max-width: 430px) {
   h2 {
+    margin-top: 5px;
     border: none;
-    line-height: 0.4;
+    font-size: 1.4em;
     font-size: 0.5em;
   }
   h2 span {
-    font-size: 0.4em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 1.4em;
     border: none;
   }
 }

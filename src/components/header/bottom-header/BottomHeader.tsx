@@ -1,7 +1,11 @@
 import React from 'react'
 import BottomHeaderstyles from './BottomHeader.module.css'
 
-const BottomHeader = ({ title }) => {
+interface Props {
+  title: string
+}
+
+const BottomHeader = ({ title }: Props) => {
   return (
     <div className={BottomHeaderstyles.header}>
       <h2>

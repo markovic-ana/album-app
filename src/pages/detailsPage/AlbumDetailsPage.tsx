@@ -5,10 +5,8 @@ import SearchBar from '../../components/searchBar/SearchBar'
 import { BASE_URL } from '../../config/params'
 import ReactPaginate from 'react-paginate'
 import { PhotosDTO } from '../../interfaces/PhotosDTO'
-import { Link } from 'react-router-dom'
 import styles from './AlbumDetailsPage.module.css'
 import { SRLWrapper } from 'simple-react-lightbox'
-import { NONAME } from 'dns'
 
 const AlbumDetailsPage = () => {
   const [photosList, setPhotosList] = useState<PhotosDTO[]>([])
@@ -20,9 +18,9 @@ const AlbumDetailsPage = () => {
   const threeColumns = styles.photoContainer
   const fourColumns = styles.photoContainer4
 
-  const { isLoading, data, error } = useFetch(
+  const { isLoading, data, error } = useFetch<PhotosDTO[]>(
     `${BASE_URL}/photos?albumId=${params.id}`
-  ) as any
+  )
 
   useEffect(() => {
     if (!isLoading) {
@@ -33,19 +31,6 @@ const AlbumDetailsPage = () => {
   const itemsPerPage = 6
   const pagesVisited = pageNumber * itemsPerPage
   const pageCount = Math.ceil(photosList.length / itemsPerPage)
-
-  const displayPhotos = photosList
-    .slice(pagesVisited, pagesVisited + itemsPerPage)
-    .map((photo, id) => {
-      return (
-        <div key={id}>
-          <a href={`${photo.url}`}>
-            <img src={`${photo.thumbnailUrl}`} alt={`${photo.title}`} />
-            <p className={styles.imgTitle}>{photo.title}</p>
-          </a>
-        </div>
-      )
-    })
 
   const changePage = ({ selected }) => {
     setPageNumber(selected)
@@ -60,14 +45,16 @@ const AlbumDetailsPage = () => {
     },
   }
 
+  if (isLoading) return <div>Loading...</div>
+  if (error)
+    return (
+      <div>
+        <p>Code: {error.status}</p>
+      </div>
+    )
+
   return (
     <div>
-      {error && (
-        <div>
-          <p>Code: {error.status}</p>
-        </div>
-      )}
-      {isLoading && <div>Loading...</div>}
       {data && (
         <SearchBar
           placeholder="Search for a photo"
@@ -76,25 +63,45 @@ const AlbumDetailsPage = () => {
         />
       )}
       <SRLWrapper options={options}>
-        <div className={columnNumber}>{data && displayPhotos}</div>
+        <div className={columnNumber}>
+          {data &&
+            photosList
+              .slice(pagesVisited, pagesVisited + itemsPerPage)
+              .map((photo, id) => {
+                return (
+                  <div key={id}>
+                    <a href={`${photo.url}`}>
+                      <img
+                        className={styles.img}
+                        src={`${photo.thumbnailUrl}`}
+                        alt={`${photo.title}`}
+                      />
+                      <p className={styles.imgTitle}>{photo.title}</p>
+                    </a>
+                  </div>
+                )
+              })}
+        </div>
       </SRLWrapper>
       <div className={styles.columnsIcons}>
         <button onClick={() => setColumnNumber(twoColumns)}>|| </button>
         <button onClick={() => setColumnNumber(threeColumns)}>|||</button>
         <button onClick={() => setColumnNumber(fourColumns)}>||||</button>
       </div>
-      <ReactPaginate
-        previousLabel={'«'}
-        nextLabel={'»'}
-        pageCount={pageCount}
-        pageRangeDisplayed={6}
-        onPageChange={changePage}
-        containerClassName={styles.pagenationButtons}
-        previousLinkClassName={styles.pagenationPreviousLink}
-        nextLinkClassName={styles.pagenationNextLink}
-        activeClassName={styles.pagenationActive}
-        disabledClassName={styles.pagenationDisabled}
-      />
+      {data && (
+        <ReactPaginate
+          previousLabel={'«'}
+          nextLabel={'»'}
+          pageCount={pageCount}
+          pageRangeDisplayed={6}
+          onPageChange={changePage}
+          containerClassName={styles.pagenationButtons}
+          previousLinkClassName={styles.pagenationPreviousLink}
+          nextLinkClassName={styles.pagenationNextLink}
+          activeClassName={styles.pagenationActive}
+          disabledClassName={styles.pagenationDisabled}
+        />
+      )}
     </div>
   )
 }

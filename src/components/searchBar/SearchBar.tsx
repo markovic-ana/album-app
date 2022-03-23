@@ -3,12 +3,24 @@ import SearchBarstyles from './SearchBar.module.css'
 import { VscSearch } from 'react-icons/vsc'
 import { Link } from 'react-router-dom'
 
-const SearchBar = ({ placeholder, data, params }) => {
-  const [filteredData, setFilteredData] = useState([])
+interface Props {
+  placeholder: string
+  params: string
+  data: any
+}
+
+interface FilteredDataDTO {
+  filteredData: string[]
+  title: string
+  value: string
+}
+
+const SearchBar = ({ placeholder, data, params }: Props) => {
+  const [filteredData, setFilteredData] = useState<FilteredDataDTO[]>([])
 
   const handleFilter = (e) => {
-    const searchWord = e.target.value
-    const newFilter = data.filter((value) => {
+    const searchWord: string = e.target.value
+    const newFilter = data.filter((value: FilteredDataDTO) => {
       return value.title.toLowerCase().includes(searchWord.toLowerCase())
     })
     if (searchWord === '') {

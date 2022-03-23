@@ -10,7 +10,7 @@ function App() {
     <div>
       <div className="container">
         <TopHeader />
-        <BottomHeader title="discover the world around you" />
+        <BottomHeader title="photography is the art of making memories" />
         <AlbumsList />
       </div>
       <Footer />

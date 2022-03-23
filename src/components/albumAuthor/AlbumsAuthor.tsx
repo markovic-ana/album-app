@@ -8,11 +8,15 @@ interface AuthorDTO {
   id: number
 }
 
-const AlbumAuthor = ({ albumsData }) => {
+interface Props {
+  userId: number
+}
+
+const AlbumAuthor = ({ userId }: Props) => {
   const [author, setAuthor] = useState<AuthorDTO>(null)
   const [users, setUsers] = useState<UsersDTO[]>([])
 
-  const { isLoading, data } = useFetch(`${BASE_URL}/users`) as any
+  const { isLoading, data } = useFetch<UsersDTO[]>(`${BASE_URL}/users`)
 
   useEffect(() => {
     if (!isLoading) {
@@ -21,20 +25,19 @@ const AlbumAuthor = ({ albumsData }) => {
   }, [data, isLoading])
 
   useEffect(() => {
-    console.log(albumsData, users)
-    //albumsData.userId nedef.
-    const checkForAuthor = users.find((user) => user.id === albumsData.userId)
-    console.log('check', albumsData.userId)
-    if (checkForAuthor[0]) {
-      setAuthor(checkForAuthor[0])
+    if (users.length > 0) {
+      const checkForAuthor = users.find((user) => user.id === userId)
+      setAuthor(checkForAuthor)
     }
-  }, [albumsData, albumsData.userId, data, users])
+  }, [userId, users])
 
   if (!author) {
     return <div>Loading...</div>
   }
 
-  return <div>{author?.name}</div>
+  return (
+    <div>{users && <p style={{ color: '#c6c6c6' }}>- {author?.name}</p>}</div>
+  )
 }
 
 export default AlbumAuthor
