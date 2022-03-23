@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import SearchBarstyles from './SearchBar.module.css'
 import { VscSearch } from 'react-icons/vsc'
 import { Link } from 'react-router-dom'
@@ -18,7 +18,7 @@ interface FilteredDataDTO {
 const SearchBar = ({ placeholder, data, params }: Props) => {
   const [filteredData, setFilteredData] = useState<FilteredDataDTO[]>([])
 
-  const handleFilter = (e) => {
+  const handleFilter = (e: ChangeEvent<HTMLInputElement>) => {
     const searchWord: string = e.target.value
     const newFilter = data.filter((value: FilteredDataDTO) => {
       return value.title.toLowerCase().includes(searchWord.toLowerCase())
